@@ -48,16 +48,23 @@ const bronn = new Squire(bronnData, 0, jaime);
 
 export const characters = [jaime, joffrey, daenerys, tyrion, bronn];
 
-console.table(characters);
+const showCards = (characters: any[]) => {
+  const app = document.querySelector(".app")!;
+  const liElement: HTMLUListElement = document.createElement("ul");
+  liElement.className = "character-list row list-unstyled";
+  app.appendChild(liElement);
 
-const app = document.querySelector(".app")!;
+  for (let i = 0; i < 5; i++) {
+    const liElementItem: HTMLLIElement = document.createElement("li");
+    liElement.appendChild(liElementItem);
+    liElementItem.className = "character col";
+    const appElement = new Component(
+      liElementItem,
+      "ul",
+      "characters-list row list-unstyled",
+      characters[i]
+    );
+  }
+};
 
-const appElement = new Component(
-  app,
-  "ul",
-  "characters-list row list-unstyled"
-);
-
-const ul = document.querySelector(".characters-list")!;
-
-const ulElement = new Component(ul, "li", "character col");
+showCards(characters);
